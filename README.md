@@ -1,4 +1,4 @@
-# docker-nginx-ssl
+# docker-nginx-ssl-http2
 
 Imagem do Nginx 1.14.0 (stable) para ambientes de desenvolvimento com HTTPS e HTTP2. Permite definir host e porta do PHP-fpm via variáveis de ambiente (graças ao [confd](https://github.com/kelseyhightower/confd))
 
@@ -16,7 +16,7 @@ No Google Chrome é possível alterar uma configuração para que esse aviso nã
 
 Depois, basta criar o container...
 
-`docker run --rm -d -p 443:443 nginx-ssl:14.0-dev`
+`docker run --rm -d -p 443:443 devnote/nginx-ssl:14.0-dev`
 
 ... e acessar https://localhost pelo Chrome.
 
@@ -50,7 +50,7 @@ docker run --rm -d \
     --network teste_rede_docker \
     --ip 175.25.1.1 \
     --name container_nginx \
-    nginx-ssl:14.0-dev
+    devnote/nginx-ssl:14.0-dev
 ```
 
 Agora basta acessar https://domain.local. O domínio estara apontando para o container e com um certificado SSL válido para a sua máquina.
@@ -68,7 +68,7 @@ docker run --rm -d \
     -v /dir/do/projeto:/var/www/html \
     -p 443:443 \
     --link container_laravel -e PHPFPM_HOSTNAME=container_laravel \
-    --name container_nginx nginx-ssl:14.0-dev
+    --name container_nginx devnote/nginx-ssl:14.0-dev
 ```
 
 Você pode acessar https://localhost/fpm-status para testar.
